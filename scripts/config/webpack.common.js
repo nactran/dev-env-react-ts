@@ -1,5 +1,5 @@
 const { resolve } = require('path');
-const { isDev, PROJECT_PATH } = require('../constants')
+const { isDev, PROJECT_PATH } = require('../constants');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
@@ -28,16 +28,6 @@ const getCssLoaders = importLoaders => [
           stage: 3,
         }),
         require('postcss-normalize'),
-        new CopyPlugin({
-          patterns: [
-            {
-              context: resolve(PROJECT_PATH, './public'),
-              from: '*',
-              to: resolve(PROJECT_PATH, './dist'),
-              toType: 'dir',
-            },
-          ],
-        }),
       ],
       sourceMap: isDev,
     },
@@ -124,6 +114,16 @@ module.exports = {
     ],
   },
   plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          context: resolve(PROJECT_PATH, './public'),
+          from: '*',
+          to: resolve(PROJECT_PATH, './dist'),
+          toType: 'dir',
+        },
+      ],
+    }),
     new HtmlWebpackPlugin({
       template: resolve(PROJECT_PATH, './public/index.html'),
       filename: 'index.html',
